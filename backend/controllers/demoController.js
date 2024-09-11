@@ -66,3 +66,22 @@ export const pagginatePageContoller = async(req, res) => {
         });
     }
 };
+
+//delete post controller
+
+export const deletePost = async (req, res) => {
+    
+    try {
+        const {id} = req.params;
+        // _id does not work but id will
+        await demoModel.findByIdAndDelete(id);
+        res.status(200).json('Post has been deleted');
+    } catch (error) {
+        res.status(400).send({
+            success:false,
+            error,
+            message: 'Failed to delete post',
+        });
+    }
+
+};

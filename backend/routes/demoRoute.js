@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deletePost,
   demoPostController,
   getDemoController,
   pagginatePageContoller,
@@ -12,5 +13,6 @@ router.post("/demo", demoPostController);
 router.get("/getdemo", getDemoController);
 
 router.get("/list-demo/:page", pagginatePageContoller);
+router.delete('/delete/:id', deletePost);
 
 export default router;
