@@ -85,3 +85,51 @@ export const deletePost = async (req, res) => {
     }
 
 };
+
+//edit data
+
+export const editController = async(req, res) => {
+    const {id} = req.params;
+    const {fname, lname} = req.body;
+    try {
+        const updatedPost = await demoModel.findByIdAndUpdate(id, 
+            {
+                fname: fname,
+                lname: lname, 
+            },
+            {new: true},
+        );
+        await updatedPost.save();
+        res.status(200).send({
+            success: true,
+            message: 'Updated post',
+            updatedPost,
+        });
+    } catch (error) {
+        res.status(400).send({
+            success: false,
+            message:'Error while updating!!',
+            error,
+        });
+    }
+};
+
+//get single demo 
+
+export const singleDemoContoller = async (req ,res) => {
+    const {id} = req.params;
+    try {
+        const singleDemo = await demoModel.findById(id);
+        res.status(200).send({
+            success: true,
+            message: 'Found single demo post',
+            singleDemo,
+        });
+    } catch (error) {
+        res.status(400).send({
+            success: false,
+            message: 'Error while receiving single post',
+            error,
+        });
+    }
+};
